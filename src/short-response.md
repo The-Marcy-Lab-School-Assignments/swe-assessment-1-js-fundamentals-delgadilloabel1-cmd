@@ -2,7 +2,7 @@
 
 Write your responses directly in this file. Follow markdown formatting guidelines.
 
----
+
 
 ## Section 1: Short Response
 
@@ -53,7 +53,7 @@ console.log(theGOAT.name);
 ```javascript 
 `Michael Jordan`
 ```
-## Explanation: Objects are Passed by Reference 🧑‍💻
+## Explanation
 
 This output happens because objects in JavaScript are assigned by **reference**, not by value.
 
@@ -152,7 +152,25 @@ function sum(...arguments) {
 ```
 
 ### Question 5
+## Function Results
+The logic of a pure function relies on making and returning a copy. Therefore:
 
+* The **`fruits`** array will still hold: `['apple', 'banana', 'cherry', 'date']`
+* The **`fruitsMinusOne`** array will hold: `['apple', 'banana', 'cherry']`
+
+## Why Copying the Array is Necessary
+It is necessary to make a copy of the array (like using the spread syntax `[...arr]`) if you want the function to be **pure**.
+
+The main reason is that array methods like **`pop()`** **mutate** (change) the array they are called on.
+
+A **pure function** has one simple rule: it can't change anything outside of itself. If we didn't make a copy and just called `arr.pop()`, we'd be directly mutating the original `fruits` array. That would be a **side effect**, making the function **impure** (or what you called "improper"). Copying the array lets us modify the copy and return it without ever touching the original.
+
+## Why We Want Pure Functions
+We want to keep the function pure because it makes our code reliable and much easier to debug.
+
+If a function mutates its input, it creates **hidden problems** that break code somewhere else down the line. We need to be able to trust that our original **`fruits`** array still holds all four values whenever we need them.
+
+By using a pure function, you guarantee **predictability**. You know exactly what values the function will return based on the input, and you know the original input data will remain stable—that way, the rest of your program won't crash because one function unexpectedly changed a value that others were depending on.
 
 ### Question 6
 
