@@ -9,8 +9,6 @@ Write your responses directly in this file. Follow markdown formatting guideline
 ### Question 1
 The code throws a **ReferenceError**.
 
-
-
 ## Explanation 
 
 The error is a **ReferenceError** because the variable `currentStatus` is not accessible where `console.log` tries to use it.
@@ -152,6 +150,104 @@ function sum(...arguments) {
 ```
 
 ### Question 5
+## What is Scope?
+
+Scope, in programming, is like a set of **rules** that dictates where your variables and functions are **visible** and accessible in your code. According to MDN, it's the **current context of execution** where values and expressions can be "seen" or referenced. Essentially, it determines the "reach" or **lifetime** of your identifiers (like variables).
+
+
+## An Analogy for Scope
+
+You can think of scope like your **car keys and your car** .
+
+You can only lock and unlock your car when you are **nearby** it or when the car is **visible** to the key's signal. If you try to press the lock button from inside your house when the car is miles away, nothing will happen! The key's "ability" (its scope) is limited to the **immediate vicinity** of the car.
+
+In the same way, a variable defined inside a specific block of code (like a function) is only "visible" and usable *within* that block. Code outside that block can't "see" or access it.
+
+
+## Demonstrating Scope
+
+
+```javascript
+// This is the **GLOBAL** world.
+let Car = "Parked in the Driveway"; 
+
+function checkCarAccess() {
+  // This is the **LOCAL** world inside the function.
+  let KeyFobSignal = "Active"; 
+
+  console.log("--- INSIDE the Function (Local Scope) ---");
+  console.log("Can I see the Car? " + Car);               // Global is visible locally.
+  console.log("Can I see the KeyFobSignal? " + KeyFobSignal); // Local is visible locally.
+}
+
+checkCarAccess(); // Run the function to see the local world.
+
+console.log("\n--- OUTSIDE the Function (Global Scope) ---");
+console.log("Can I see the Car? " + Car);               // Global is still visible.
+// console.log("Can I see the KeyFobSignal? " + KeyFobSignal); 
+// If you uncomment this, the code will CRASH!
+```
+## Explanation of the Example
+
+When you read the code, you see two successful console messages *inside* the function. This is because **local scope** (the function) can always see variables defined in the larger **global scope**.
+
+However, look at the last part, which is running *outside* the function:
+
+* **`Car` (Global Variable):** This variable can be accessed anywhere. It's like the car sitting in the driveway—everyone can see it.
+* **`KeyFobSignal` (Local Variable):** This variable is defined *inside* the function. Once the function finishes running, this variable is immediately forgotten and ceases to exist. It is **out of scope**!
+
+If you try to access a **local** variable from the **global** world, the code throws an error because that variable doesn't have the **scope** (visibility) to be seen outside its home function.
+### Question 6
+Modules solve the problem of having one giant, messy code file and help prevent conflicts:
+
+* **Organization:** It keeps your project clean. Instead of one huge list, you have small, topic-specific files. It's like having a neat drawer for your socks, a different one for shirts, and a third for pants.
+* **Reusability:** You write a great function once, and then you can import that tool into any other file that needs it, saving you time and effort.
+* **Isolation:** Variables inside a module are private by default. This prevents them from accidentally interfering with variables in other modules (no "global mess").
+
+
+
+## Modules in Action
+
+Let's use a car. We'll put our car's controls in one file and use them in a main file.
+
+#### 1. The Exporter (`car.js`)
+
+This file is the module. It **exports** the features we want to share.
+
+```javascript
+// A variable to share
+const carModel = "Tesla Model 3";
+
+// A function to share
+function lockCar(isLocked) {
+  return `${carModel} is ${isLocked ? 'locked' : 'unlocked'}.`;
+}
+
+// We EXPORT the items with 'module.exports'.
+module.exports = {
+  model: carModel,
+  lock: lockCar
+};
+```
+## 2. The Importer (`driver.js`)
+
+This file uses the **require** keyword to bring in the exported features.
+
+```javascript
+// We IMPORT everything exported from './car.js'.
+const carModule = require('./car.js');
+
+// Now we can use the imported function and variable
+console.log("Starting the day with the " + carModule.model); 
+let status = carModule.lock(true);
+console.log(status);
+```
+#### Explanation
+
+* **Export:** In `car.js`, the `module.exports` line tells the program, "These are the functions and variables you are allowed to take out of this file."
+* **Import:** In `driver.js`, the `require('./car.js')` line grabs those exported items and packages them up into the `carModule` variable.
+* **Result:** The `driver.js` file now has access to the `model` variable and the `lock` function without having to re-write that logic. The code is shared and organized!
+### Question 7
 ## Function Results
 The logic of a pure function relies on making and returning a copy. Therefore:
 
@@ -171,13 +267,6 @@ We want to keep the function pure because it makes our code reliable and much ea
 If a function mutates its input, it creates **hidden problems** that break code somewhere else down the line. We need to be able to trust that our original **`fruits`** array still holds all four values whenever we need them.
 
 By using a pure function, you guarantee **predictability**. You know exactly what values the function will return based on the input, and you know the original input data will remain stable—that way, the rest of your program won't crash because one function unexpectedly changed a value that others were depending on.
-
-### Question 6
-
-
-
-### Question 7
-
 
 ### Question 8
 
