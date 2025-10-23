@@ -35,7 +35,7 @@ const fixVariables = (temp) => {
 
 const doubleAllItemsPurely = (arr) => {
   const newArr = []
-  for (let num of arr) {
+  for (const num of arr) {
     newArr.push(num * 2)
   }
   return newArr

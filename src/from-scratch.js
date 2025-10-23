@@ -57,7 +57,7 @@ const shoutEveryLetterForLoop = (str) => {
 // // ============================================
 
 const letterCaseCounts = (str) => {
-  let counts = {
+  const counts = {
     lowercase: 0,
     uppercase: 0,
     neither: 0,
