@@ -12,6 +12,7 @@
 // This function should print and return a message based on temperature
 
 const fixVariables = (temp) => {
+  let msg;
   if (temp < 30) {
     msg = 'Pretty chilly.';
   } else if (temp < 70) {
@@ -33,7 +34,7 @@ const fixVariables = (temp) => {
 // It should NOT mutate the original array
 
 const doubleAllItemsPurely = (arr) => {
-  let newArr = []
+  const newArr = []
   for (let num of arr) {
     newArr.push(num * 2)
   }

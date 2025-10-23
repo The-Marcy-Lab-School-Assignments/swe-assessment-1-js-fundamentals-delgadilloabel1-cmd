@@ -16,13 +16,13 @@
 const petJudger = (petBreed, petName) => {
   if (petBreed === undefined || petName === undefined) {
     console.log(`Missing information. Please provide a valid pet.`)
-  } else if (petBreed === "dog") {
+  } else if (petBreed === `dog`) {
     console.log(`I love dogs! ${petName} is so cute!`)
-  } else if (petBreed === "cat") {
+  } else if (petBreed === `cat`) {
     console.log(`I love cats! ${petName} is so cute!`)
-  } else if (petBreed === "turtle") {
+  } else if (petBreed === `turtle`) {
     console.log(`Who doesn't love a good turtle? ${petName} is the tops.`)
-  } else if (petBreed === "snake") {
+  } else if (petBreed === `snake`) {
     console.log(`Not a fan, please take ${petName} and leave.`)
   } else {
     console.log(`What an...interesting pet.`)
@@ -60,9 +60,9 @@ const letterCaseCounts = (str) => {
   let counts = {
     lowercase: 0,
     uppercase: 0,
-    neither: 0
+    neither: 0,
   };
-  for (let char of str) {
+  for (const char of str) {
     if (char >= 'a' && char <= 'z') {
       counts.lowercase += 1;
     } else if (char >= 'A' && char <= 'Z') {
